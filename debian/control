@@ -9,8 +9,8 @@ Homepage: https://github.com/osamuaoki/osamu-task
 Package: 00-min
 Architecture: all
 Multi-Arch: foreign
-Depends: ${misc:Depends}
-Recommends: aptitude, locales-all, mc, sudo, vim, wget
+Depends: aptitude, locales-all, sudo, ${misc:Depends}
+Recommends: mc, vim, wget
 Provides: nano
 Replaces: nano
 Description: Task for the minimal system
@@ -155,7 +155,6 @@ Multi-Arch: foreign
 Depends: 00-min, build-essential, debhelper, devscripts, ${misc:Depends}
 Recommends: 00-jpn,
             apt-file,
-            asciidoc,
             ben,
             black,
             cargo,
@@ -223,6 +222,8 @@ Description: Task for the baseline development system
   * Tools to create web pages
   * Tools to create deb package repository
   * Tools to install external programs not packaged by Debian
+ This doesn't contain:
+  * Tools to pull-in TeX programs
 
 Package: 00-doc
 Architecture: all
@@ -287,11 +288,14 @@ Package: 00-tex
 Architecture: all
 Multi-Arch: foreign
 Depends: 00-dev, ${misc:Depends}
-Recommends: dblatex,
+Recommends: asciidoc,
+            asciidoctor,
+            dblatex,
             fonts-arphic-bsmi00lp,
             fonts-arphic-gbsn00lp,
             fonts-wqy-zenhei,
-            texlive-full
+            texlive-full,
+            xmlto
 Description: Task to add TeX support
  This is a task package to add TeX support.
  .
@@ -326,3 +330,27 @@ Description: Task to add extra utilities
  the existing tasks are moved to here.
  .
  This is here to easily add and remove relevant packages.
+
+Package: 00-notex
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}
+Conflicts: dblatex,
+           texlive,
+           texlive-base,
+           texlive-full,
+           texlive-latex-base,
+           texlive-lualatex,
+           texlive-xetex
+Provides: dblatex,
+          texlive,
+          texlive-base,
+          texlive-full,
+          texlive-latex-base,
+          texlive-lualatex,
+          texlive-xetex
+Description: Task to avoid adding TeX related packages
+ This is a task package to avoid adding TeX support.
+ .
+ This is here to easily skip installing TeX packages to avoid huge package
+ installation due to their dependencies.
