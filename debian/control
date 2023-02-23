@@ -1,0 +1,328 @@
+Source: osamu-task
+Section: tasks
+Priority: optional
+Maintainer: Osamu Aoki <osamu@debian.org>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Homepage: https://github.com/osamuaoki/osamu-task
+
+Package: 00-min
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}
+Recommends: aptitude, locales-all, mc, sudo, vim, wget
+Provides: nano
+Replaces: nano
+Description: Task for the minimal system
+ This is a task package installing minimal system without GUI.
+ .
+ This is meant to be used for creating the initial image for the minimal chroot
+ and virtual system.
+
+Package: 00-cli
+Architecture: all
+Multi-Arch: foreign
+Depends: 00-min, ${misc:Depends}
+Recommends: bsd-mailx,
+            btrfs-progs,
+            bzip2,
+            cryptsetup,
+            cups,
+            dislocker,
+            dmsetup,
+            e2fsprogs,
+            eject,
+            exfatprogs,
+            fdisk,
+            fzf,
+            gdisk,
+            gdu,
+            git,
+            gnupg,
+            gpart,
+            hardinfo,
+            hdparm,
+            htop,
+            hwinfo,
+            info,
+            iproute2,
+            iptables,
+            kpartx,
+            less,
+            liblz4-tool,
+            libsecret-tools,
+            moreutils,
+            mtools,
+            mutt,
+            ntfs-3g,
+            nvme-cli,
+            openssh-client,
+            openssh-server,
+            parted,
+            pinentry-curses,
+            printer-driver-escpr,
+            rsync,
+            scdaemon,
+            screen,
+            smartmontools,
+            sudo,
+            systemd-container,
+            task-english,
+            task-laptop,
+            testdisk,
+            time,
+            tmux,
+            tree,
+            udftools,
+            usbutils,
+            w3m,
+            xfsprogs,
+            xorriso,
+            xxd,
+            xz-utils,
+            zip,
+            zstd
+Description: Task for the baseline CLI system
+ This is a task package installing the baseline CLI system without GUI.
+ .
+ This contains:
+  * File system CLI tools
+  * Compression CLI tools
+  * Network CLI tools
+ .
+ This doesn't contain:
+  * Tools to compile and run programs
+  * Tools to install external programs not packaged by Debian
+
+Package: 00-gui
+Architecture: all
+Multi-Arch: foreign
+Depends: 00-cli, ${misc:Depends}
+Recommends: adwaita-qt,
+            btrfs-heatmap,
+            chromium,
+            gnome-software-plugin-flatpak,
+            gnome-software-plugin-snap,
+            gparted,
+            pinentry-gnome3,
+            smart-notifier,
+            ssh-askpass,
+            task-desktop,
+            tkinfo,
+            wl-clipboard,
+            xclip,
+            xdg-desktop-portal,
+            xdu,
+            xsel,
+            zim
+Description: Task for the baseline GUI system
+ This is a task package installing the baseline GUI system.
+ .
+ This contains:
+  * Desktop GUI tools
+  * Network GUI tools
+ .
+ This doesn't contain:
+  * Tools to compile and run programs
+  * Tools to install external programs not packaged by Debian
+
+Package: 00-jpn
+Architecture: all
+Multi-Arch: foreign
+Depends: 00-gui, ${misc:Depends}
+Recommends: fonts-takao,
+            fonts-vlgothic,
+            ibus-anthy,
+            ibus-gtk,
+            ibus-gtk3,
+            ibus-gtk4,
+            ibus-mozc,
+            ibus-wayland,
+            libqt5gui5,
+            lv,
+            nkf
+Description: Task for the baseline Japanese GUI system
+ This is a task package installing the baseline Japanese GUI system.
+ .
+ This contain:
+  * Input methods
+  * Fonts
+  * Encoding filter
+
+Package: 00-dev
+Architecture: all
+Multi-Arch: foreign
+Depends: 00-min, build-essential, debhelper, devscripts, ${misc:Depends}
+Recommends: 00-jpn,
+            apt-file,
+            asciidoc,
+            ben,
+            black,
+            cargo,
+            ccache,
+            cgdb,
+            clang-format,
+            cmake,
+            curl,
+            debmake,
+            dgit,
+            dh-python,
+            docbook-xml,
+            docbook-xsl,
+            eatmydata,
+            faketime,
+            gdb,
+            gdebi,
+            gettext,
+            git,
+            git-buildpackage,
+            gitk,
+            glade,
+            golang,
+            golang-any,
+            graphicsmagick-imagemagick-compat,
+            hugo,
+            imediff,
+            libreply-perl,
+            libterm-readline-gnu-perl,
+            libxml2-utils,
+            lsof,
+            ltrace,
+            luarocks,
+            meld,
+            nodejs,
+            npm,
+            perl,
+            pipx,
+            po4a,
+            python3,
+            python3-distutils-extra,
+            python3-gi,
+            python3-pil,
+            python3-venv,
+            quilt,
+            reprepro,
+            rlwrap,
+            rpm2cpio,
+            rustc,
+            sbuild,
+            shellcheck,
+            shunit2,
+            signing-party,
+            strace,
+            texinfo,
+            xsltproc,
+            xtrace
+Description: Task for the baseline development system
+ This is a task package installing the baseline development system.
+ .
+ This contains:
+  * Tools to compile, run and debug programs
+  * Tools to execute interpreters with their support libraries
+  * Tools to develop Debian packages
+  * Tools to create web pages
+  * Tools to create deb package repository
+  * Tools to install external programs not packaged by Debian
+
+Package: 00-doc
+Architecture: all
+Multi-Arch: foreign
+Depends: 00-dev, ${misc:Depends}
+Recommends: cpp-doc,
+            debian-policy,
+            debian-reference,
+            debmake-doc,
+            developers-reference,
+            doc-base,
+            gcc-doc,
+            gccintro,
+            gdb-doc,
+            git-doc,
+            ibus-doc,
+            iproute2-doc,
+            maint-guide,
+            make-doc,
+            perl-doc,
+            python3-doc
+Description: Task to add documentation support
+ This is a task package to add documentation support for the baseline
+ development system.
+ .
+ This may pull in some non-free GFDL packages.
+
+Package: 00-typ
+Architecture: all
+Multi-Arch: foreign
+Depends: 00-dev, 00-doc, 00-jpn, ${misc:Depends}
+Description: Task for the typical desktop system
+ This is a task package installing the typical desktop system.
+ .
+ This is for the default Desktop installation.
+
+Package: 00-iot
+Architecture: all
+Multi-Arch: foreign
+Depends: 00-dev, ${misc:Depends}
+Recommends: arduino,
+            arduino-mk,
+            avra,
+            avrdude,
+            avrp,
+            binutils-avr,
+            freecad,
+            fritzing,
+            gcc-avr,
+            gdb-avr,
+            kicad,
+            librecad,
+            openscad,
+            simavr
+Description: Task to add IoT development support
+ This is a task package to add IoT development support.
+ .
+ This is here to easily add and remove relevant packages for hardware and
+ firmware developments.
+
+Package: 00-tex
+Architecture: all
+Multi-Arch: foreign
+Depends: 00-dev, ${misc:Depends}
+Recommends: dblatex,
+            fonts-arphic-bsmi00lp,
+            fonts-arphic-gbsn00lp,
+            fonts-wqy-zenhei,
+            texlive-full
+Description: Task to add TeX support
+ This is a task package to add TeX support.
+ .
+ This is here to easily add and remove relevant packages to build PDF files.
+
+Package: 00-virt
+Architecture: all
+Multi-Arch: foreign
+Depends: 00-dev, ${misc:Depends}
+Recommends: gnome-boxes, lxc, vde2, virt-manager, virt-viewer
+Description: Task to add virtual OS environment support
+ This is a task package to add virtual OS environment support.
+ .
+ This is here to easily add and remove relevant packages.
+
+Package: 00-extra
+Architecture: all
+Multi-Arch: foreign
+Depends: 00-dev, ${misc:Depends}
+Recommends: fail2ban,
+            git-svn,
+            knockd,
+            linux-cpupower,
+            memtest86+,
+            parallel,
+            rclone,
+            rename,
+            shellinabox,
+            subversion
+Description: Task to add extra utilities
+ This is a task package to add extra utilities.  Anything which doesn't fit in
+ the existing tasks are moved to here.
+ .
+ This is here to easily add and remove relevant packages.
