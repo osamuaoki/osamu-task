@@ -288,9 +288,7 @@ Package: 00-tex
 Architecture: all
 Multi-Arch: foreign
 Depends: 00-dev, ${misc:Depends}
-Recommends: asciidoc,
-            asciidoctor,
-            dblatex,
+Recommends: dblatex,
             fonts-arphic-bsmi00lp,
             fonts-arphic-gbsn00lp,
             fonts-wqy-zenhei,
@@ -315,7 +313,9 @@ Package: 00-extra
 Architecture: all
 Multi-Arch: foreign
 Depends: 00-dev, ${misc:Depends}
-Recommends: fail2ban,
+Recommends: asciidoc,
+            asciidoctor,
+            fail2ban,
             git-svn,
             knockd,
             linux-cpupower,
@@ -336,15 +336,19 @@ Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends}
 Conflicts: dblatex,
+           dvipng,
            texlive,
            texlive-base,
+           texlive-binaries,
            texlive-full,
            texlive-latex-base,
            texlive-lualatex,
            texlive-xetex
 Provides: dblatex,
+          dvipng,
           texlive,
           texlive-base,
+          texlive-binaries,
           texlive-full,
           texlive-latex-base,
           texlive-lualatex,
@@ -354,3 +358,7 @@ Description: Task to avoid adding TeX related packages
  .
  This is here to easily skip installing TeX packages to avoid huge package
  installation due to their dependencies.
+ .
+ Installing this package doesn't prevent installing texinfo package and
+ it to generate info pages.  But installing this will break its PDF generating
+ capability.

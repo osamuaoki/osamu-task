@@ -1,3 +1,9 @@
+osamu-task (0.3) unstable; urgency=medium
+
+  * Refine notex package. 
+
+ -- Osamu Aoki <osamu@debian.org>  Fri, 24 Feb 2023 14:23:35 +0900
+
 osamu-task (0.2) unstable; urgency=medium
 
   * Add notex package. 
