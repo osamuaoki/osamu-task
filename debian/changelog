@@ -1,17 +1,23 @@
+osamu-task (0.4) unstable; urgency=medium
+
+  * Drop zim
+
+ -- Osamu Aoki <osamu@debian.org>  Mon, 12 Jun 2023 17:54:50 +0900
+
 osamu-task (0.3) unstable; urgency=medium
 
-  * Refine notex package. 
+  * Refine notex package.
 
  -- Osamu Aoki <osamu@debian.org>  Fri, 24 Feb 2023 14:23:35 +0900
 
 osamu-task (0.2) unstable; urgency=medium
 
-  * Add notex package. 
+  * Add notex package.
 
  -- Osamu Aoki <osamu@debian.org>  Fri, 24 Feb 2023 08:23:45 +0900
 
 osamu-task (0.1) unstable; urgency=medium
 
-  * Initial release. 
+  * Initial release.
 
  -- Osamu Aoki <osamu@debian.org>  Thu, 23 Feb 2023 06:45:21 +0900

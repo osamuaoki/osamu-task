@@ -113,8 +113,7 @@ Recommends: adwaita-qt,
             xclip,
             xdg-desktop-portal,
             xdu,
-            xsel,
-            zim
+            xsel
 Description: Task for the baseline GUI system
  This is a task package installing the baseline GUI system.
  .
