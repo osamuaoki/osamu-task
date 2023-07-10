@@ -114,6 +114,7 @@ Recommends: adwaita-qt,
             xdg-desktop-portal,
             xdu,
             xsel
+Provides:   gnome-shell-extensions
 Description: Task for the baseline GUI system
  This is a task package installing the baseline GUI system.
  .
