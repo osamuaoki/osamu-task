@@ -9,24 +9,45 @@ Homepage: https://github.com/osamuaoki/osamu-task
 Package: 00-min
 Architecture: all
 Multi-Arch: foreign
-Depends: aptitude, locales-all, sudo, ${misc:Depends}
-Recommends: mc, vim, wget
+Depends: aptitude,
+         locales-all,
+         sudo,
+         task-english,
+         task-laptop,
+         task-ssh-server,
+         ${misc:Depends}
+Recommends: btrfs-progs,
+            cryptsetup,
+            discover,
+            firmware-atheros,
+            firmware-linux,
+            firmware-realtek,
+            git,
+            gnupg,
+            grub-pc | grub-efi-amd64,
+            installation-report,
+            linux-image-amd64,
+            mc,
+            screen,
+            usbutils,
+            vim,
+            wget
 Provides: nano
 Replaces: nano
-Description: Task for the minimal system
+Description: Task for the minimal non-GUI system
  This is a task package installing minimal system without GUI.
  .
  This is meant to be used for creating the initial image for the minimal chroot
  and virtual system.
+ .
+ Installer installed packages are included
 
-Package: 00-cli
+Package: 01-cli
 Architecture: all
 Multi-Arch: foreign
 Depends: 00-min, ${misc:Depends}
 Recommends: bsd-mailx,
-            btrfs-progs,
             bzip2,
-            cryptsetup,
             cups,
             dislocker,
             dmsetup,
@@ -37,8 +58,6 @@ Recommends: bsd-mailx,
             fzf,
             gdisk,
             gdu,
-            git,
-            gnupg,
             gpart,
             hardinfo,
             hdparm,
@@ -51,6 +70,9 @@ Recommends: bsd-mailx,
             less,
             liblz4-tool,
             libsecret-tools,
+            lxc,
+            lxd,
+            lxd-tools,
             moreutils,
             mtools,
             mutt,
@@ -61,11 +83,11 @@ Recommends: bsd-mailx,
             parted,
             pinentry-curses,
             printer-driver-escpr,
+            python3-pip,
+            python3-virtualenv,
             rsync,
             scdaemon,
-            screen,
             smartmontools,
-            sudo,
             systemd-container,
             task-english,
             task-laptop,
@@ -74,7 +96,6 @@ Recommends: bsd-mailx,
             tmux,
             tree,
             udftools,
-            usbutils,
             w3m,
             xfsprogs,
             xorriso,
@@ -94,27 +115,27 @@ Description: Task for the baseline CLI system
   * Tools to compile and run programs
   * Tools to install external programs not packaged by Debian
 
-Package: 00-gui
+Package: 02-gui
 Architecture: all
 Multi-Arch: foreign
-Depends: 00-cli, ${misc:Depends}
+Depends: 01-cli, task-desktop, ${misc:Depends}
 Recommends: adwaita-qt,
             btrfs-heatmap,
             chromium,
+            gitk,
             gnome-software-plugin-flatpak,
             gnome-software-plugin-snap,
             gparted,
             pinentry-gnome3,
             smart-notifier,
             ssh-askpass,
-            task-desktop,
             tkinfo,
             wl-clipboard,
             xclip,
             xdg-desktop-portal,
             xdu,
             xsel
-Provides:   gnome-shell-extensions
+Provides: gnome-shell-extensions
 Description: Task for the baseline GUI system
  This is a task package installing the baseline GUI system.
  .
@@ -126,13 +147,14 @@ Description: Task for the baseline GUI system
   * Tools to compile and run programs
   * Tools to install external programs not packaged by Debian
 
-Package: 00-jpn
+Package: 03-jpn
 Architecture: all
 Multi-Arch: foreign
-Depends: 00-gui, ${misc:Depends}
-Recommends: fonts-takao,
+Depends: 02-gui, ${misc:Depends}
+Recommends: fontmatrix,
+            fonts-noto,
+            fonts-takao,
             fonts-vlgothic,
-            ibus-anthy,
             ibus-gtk,
             ibus-gtk3,
             ibus-gtk4,
@@ -149,12 +171,11 @@ Description: Task for the baseline Japanese GUI system
   * Fonts
   * Encoding filter
 
-Package: 00-dev
+Package: 04-dev
 Architecture: all
 Multi-Arch: foreign
-Depends: 00-min, build-essential, debhelper, devscripts, ${misc:Depends}
-Recommends: 00-jpn,
-            apt-file,
+Depends: 01-cli, build-essential, debhelper, devscripts, ${misc:Depends}
+Recommends: apt-file,
             ben,
             black,
             cargo,
@@ -173,7 +194,6 @@ Recommends: 00-jpn,
             gdb,
             gdebi,
             gettext,
-            git,
             git-buildpackage,
             gitk,
             golang,
@@ -224,10 +244,10 @@ Description: Task for the baseline development system
  This doesn't contain:
   * Tools to pull-in TeX programs
 
-Package: 00-doc
+Package: 05-doc
 Architecture: all
 Multi-Arch: foreign
-Depends: 00-dev, ${misc:Depends}
+Depends: ${misc:Depends}
 Recommends: cpp-doc,
             debian-policy,
             debian-reference,
@@ -250,19 +270,30 @@ Description: Task to add documentation support
  .
  This may pull in some non-free GFDL packages.
 
-Package: 00-typ
+Package: 06-typ
 Architecture: all
 Multi-Arch: foreign
-Depends: 00-dev, 00-doc, 00-jpn, ${misc:Depends}
+Depends: 02-gui, ${misc:Depends}
+Recommends: 01-cli, 03-jpn, 04-dev, 05-doc
 Description: Task for the typical desktop system
  This is a task package installing the typical desktop system.
  .
  This is for the default Desktop installation.
 
-Package: 00-iot
+Package: 12-virt
 Architecture: all
 Multi-Arch: foreign
-Depends: 00-dev, ${misc:Depends}
+Depends: 02-gui, ${misc:Depends}
+Recommends: gnome-boxes, lxc, vde2, virt-manager, virt-viewer
+Description: Task to add virtual OS environment support
+ This is a task package to add virtual OS environment support.
+ .
+ This is here to easily add and remove relevant packages.
+
+Package: 14-iot
+Architecture: all
+Multi-Arch: foreign
+Depends: 04-dev, ${misc:Depends}
 Recommends: arduino,
             arduino-mk,
             avra,
@@ -283,10 +314,10 @@ Description: Task to add IoT development support
  This is here to easily add and remove relevant packages for hardware and
  firmware developments.
 
-Package: 00-tex
+Package: 14-tex
 Architecture: all
 Multi-Arch: foreign
-Depends: 00-dev, ${misc:Depends}
+Depends: 04-dev, ${misc:Depends}
 Recommends: dblatex,
             fonts-arphic-bsmi00lp,
             fonts-arphic-gbsn00lp,
@@ -298,20 +329,10 @@ Description: Task to add TeX support
  .
  This is here to easily add and remove relevant packages to build PDF files.
 
-Package: 00-virt
+Package: 16-extra
 Architecture: all
 Multi-Arch: foreign
-Depends: 00-dev, ${misc:Depends}
-Recommends: gnome-boxes, lxc, vde2, virt-manager, virt-viewer
-Description: Task to add virtual OS environment support
- This is a task package to add virtual OS environment support.
- .
- This is here to easily add and remove relevant packages.
-
-Package: 00-extra
-Architecture: all
-Multi-Arch: foreign
-Depends: 00-dev, ${misc:Depends}
+Depends: 06-typ, ${misc:Depends}
 Recommends: asciidoc,
             asciidoctor,
             fail2ban,
@@ -330,7 +351,7 @@ Description: Task to add extra utilities
  .
  This is here to easily add and remove relevant packages.
 
-Package: 00-notex
+Package: 99-notex
 Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends}

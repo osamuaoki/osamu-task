@@ -1,3 +1,9 @@
+osamu-task (0.6) unstable; urgency=medium
+
+  * Reorganize package list
+
+ -- Osamu Aoki <osamu@debian.org>  Mon, 09 Oct 2023 23:38:14 +0900
+
 osamu-task (0.5) unstable; urgency=medium
 
   * Drop galde supporting GTK3 (Use Cambalach from flathub for GTK4)
