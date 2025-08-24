@@ -1,3 +1,9 @@
+osamu-task (0.8) unstable; urgency=medium
+
+  * Fix package list.
+
+ -- Osamu Aoki <osamu@debian.org>  Sun, 24 Aug 2025 23:49:04 +0900
+
 osamu-task (0.7) unstable; urgency=medium
 
   * Trixie updates including gnome-shell-extensions related packages
