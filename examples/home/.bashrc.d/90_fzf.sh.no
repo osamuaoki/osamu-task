@@ -1,0 +1,25 @@
+# sourced at the end of ~/.bashrc
+# vim:set et sw=4 sts=4:
+
+################# CUSTOMIZATION NOTE (fzf) ############################
+# fancy prompt
+FZF_DEFAULT_OPTS="--prompt=' ⇶⇶⇶⇶⇶⇶⇶⇶ '"
+################# CUSTOMIZATION NOTE (key-bindings.bash) ##############
+# - $FZF_TMUX_OPTS
+# - $FZF_CTRL_T_COMMAND
+# - $FZF_CTRL_T_OPTS
+# - $FZF_CTRL_R_OPTS
+# - $FZF_ALT_C_COMMAND
+# - $FZF_ALT_C_OPTS
+#######################################################################
+
+# fzf -- follow its README.md
+if command -v fzf > /dev/null; then
+  FZF_KEYBINDINGS_PATH=/usr/share/doc/fzf/examples/key-bindings.bash
+  if [ -f $FZF_KEYBINDINGS_PATH ]; then
+    # shellcheck disable=1090
+    . $FZF_KEYBINDINGS_PATH
+  else
+    echo "E: missing $FZF_KEYBINDINGS_PATH"
+  fi
+fi

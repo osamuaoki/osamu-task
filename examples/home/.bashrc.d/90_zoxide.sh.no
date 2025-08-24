@@ -1,0 +1,8 @@
+# sourced at the end of ~/.bashrc
+# vim:set et sw=4 sts=4:
+
+# smart cd command like zsh
+# https://github.com/ajeetdsouza/zoxide
+if command -v zoxide > /dev/null; then
+  eval "$(zoxide init bash)"
+fi

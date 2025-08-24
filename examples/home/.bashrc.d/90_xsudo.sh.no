@@ -1,0 +1,19 @@
+##############################################################################
+# Local BASH customization sourced by ~/.bashrc
+##############################################################################
+# vim: sw=2 sts=2 et si ai tw=79:
+# shellcheck shell=bash
+##############################################################################
+# update main/chroot system
+##############################################################################
+
+# run X program as root
+# wrap sudo to minimize exposure (w/ check for the 2nd sudo process)
+# https://wiki.archlinux.org/index.php/Running_GUI_applications_as_root#Using_xhost
+# https://wiki.debian.org/Wayland
+# https://support.google.com/chromebook/thread/36971806?hl=en
+xsudo() {
+  /usr/bin/xhost si:localuser:root
+  /usr/bin/sudo "$@"
+  /usr/bin/pgrep /usr/bin/sudo > /dev/null || /usr/bin/xhost -si:localuser:root
+}

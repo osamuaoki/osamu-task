@@ -1,0 +1,6 @@
+# sourced at the end of ~/.bashrc
+# vim:set et sw=4 sts=4:
+
+export LANG=C.UTF-8
+export LANGUAGE=en_US:en
+export LC_TIME=en_DK.UTF-8

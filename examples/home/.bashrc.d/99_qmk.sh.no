@@ -1,0 +1,5 @@
+# sourced at the end of ~/.bashrc
+# vim:set et sw=4 sts=4:
+
+# QMK firmware (Arduino/ATMega system development)
+export QMK_HOME="$HOME/github/qmk/qmk_firmware"

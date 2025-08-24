@@ -1,0 +1,21 @@
+#
+# User configuration file to override /etc/Muttrc
+#
+##### SENDMAIL #####
+set from="Osamu Aoki <osamu@debian.org>"
+set send_charset="us-ascii:iso-8859-1:iso-2022-jp"
+set allow_8bit=no
+set pgp_sign_as="1DD8D791"
+set pgp_verify_sig=no
+set sendmail = '/home/osamu/bin/sendmail-p.d.o'
+
+macro index   S ":toggle pgp_verify_sig\n"       # define S to toggle sig check
+
+set mbox_type=mbox
+set mbox=~/Mail/mbox
+set record=~/Mail/sent
+set folder=~/Mail
+
+##### PAGER #####
+auto_view text/html
+

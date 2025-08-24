@@ -2,111 +2,118 @@ Source: osamu-task
 Section: tasks
 Priority: optional
 Maintainer: Osamu Aoki <osamu@debian.org>
-Build-Depends: debhelper-compat (= 13)
+Build-Depends:
+ debhelper-compat (= 13),
 Standards-Version: 4.6.2
 Homepage: https://github.com/osamuaoki/osamu-task
 
 Package: 00-min
 Architecture: all
 Multi-Arch: foreign
-Depends: aptitude,
-         locales-all,
-         sudo,
-         task-english,
-         task-laptop,
-         task-ssh-server,
-         ${misc:Depends}
-Recommends: btrfs-progs,
-            cryptsetup,
-            discover,
-            firmware-atheros,
-            firmware-linux,
-            firmware-realtek,
-            git,
-            gnupg,
-            grub-pc | grub-efi-amd64,
-            installation-report,
-            linux-image-amd64,
-            mc,
-            screen,
-            usbutils,
-            vim,
-            wget
-Provides: nano
-Replaces: nano
+Depends:
+ aptitude,
+ locales-all,
+ mc,
+ sudo,
+ systemd-cron,
+ vim,
+ wget,
+ ${misc:Depends},
+Provides:
+ nano,
+Replaces:
+ nano,
 Description: Task for the minimal non-GUI system
  This is a task package installing minimal system without GUI.
  .
  This is meant to be used for creating the initial image for the minimal chroot
  and virtual system.
- .
- Installer installed packages are included
 
 Package: 01-cli
 Architecture: all
 Multi-Arch: foreign
-Depends: 00-min, ${misc:Depends}
-Recommends: bsd-mailx,
-            bzip2,
-            cups,
-            dislocker,
-            dmsetup,
-            e2fsprogs,
-            eject,
-            exfatprogs,
-            fdisk,
-            fzf,
-            gdisk,
-            gdu,
-            gpart,
-            hardinfo,
-            hdparm,
-            htop,
-            hwinfo,
-            info,
-            iproute2,
-            iptables,
-            kpartx,
-            less,
-            liblz4-tool,
-            libsecret-tools,
-            lxc,
-            lxd,
-            lxd-tools,
-            moreutils,
-            mtools,
-            mutt,
-            ntfs-3g,
-            nvme-cli,
-            openssh-client,
-            openssh-server,
-            parted,
-            pinentry-curses,
-            printer-driver-escpr,
-            python3-pip,
-            python3-virtualenv,
-            rsync,
-            scdaemon,
-            smartmontools,
-            systemd-container,
-            task-english,
-            task-laptop,
-            testdisk,
-            time,
-            tmux,
-            tree,
-            udftools,
-            w3m,
-            xfsprogs,
-            xorriso,
-            xxd,
-            xz-utils,
-            zip,
-            zstd
+Depends:
+ 00-min,
+ ${misc:Depends},
+Recommends:
+ bsd-mailx,
+ btrfs-progs,
+ bzip2,
+ cryptsetup,
+ cups,
+ discover,
+ dislocker,
+ dmsetup,
+ e2fsprogs,
+ eject,
+ exfatprogs,
+ fdisk,
+ firmware-atheros,
+ firmware-linux,
+ firmware-realtek,
+ fzf,
+ gdisk,
+ gdu,
+ git,
+ gnupg,
+ gpart,
+ grub-pc | grub-efi-amd64,
+ hardinfo,
+ hdparm,
+ htop,
+ hwinfo,
+ info,
+ installation-report,
+ iproute2,
+ iptables,
+ kpartx,
+ less,
+ liblz4-tool,
+ libsecret-tools,
+ linux-image-amd64,
+ lvm2,
+ lxc,
+ lxd,
+ lxd-tools,
+ moreutils,
+ mtools,
+ mutt,
+ nftables,
+ ntfs-3g,
+ nvme-cli,
+ openssh-client,
+ openssh-server,
+ parted,
+ pinentry-curses,
+ printer-driver-escpr,
+ python3-pip,
+ python3-virtualenv,
+ rsync,
+ scdaemon,
+ screen,
+ smartmontools,
+ systemd-container,
+ task-english,
+ task-laptop,
+ task-ssh-server,
+ testdisk,
+ time,
+ tmux,
+ tree,
+ udftools,
+ udisk2,
+ usbutils,
+ w3m,
+ xfsprogs,
+ xorriso,
+ xxd,
+ xz-utils,
+ zip,
+ zstd,
 Description: Task for the baseline CLI system
  This is a task package installing the baseline CLI system without GUI.
  .
- This contains:
+ This contains as "Recommends":
   * File system CLI tools
   * Compression CLI tools
   * Network CLI tools
@@ -118,24 +125,31 @@ Description: Task for the baseline CLI system
 Package: 02-gui
 Architecture: all
 Multi-Arch: foreign
-Depends: 01-cli, task-desktop, ${misc:Depends}
-Recommends: adwaita-qt,
-            btrfs-heatmap,
-            chromium,
-            gitk,
-            gnome-software-plugin-flatpak,
-            gnome-software-plugin-snap,
-            gparted,
-            pinentry-gnome3,
-            smart-notifier,
-            ssh-askpass,
-            tkinfo,
-            wl-clipboard,
-            xclip,
-            xdg-desktop-portal,
-            xdu,
-            xsel
-Provides: gnome-shell-extensions
+Depends:
+ 01-cli,
+ ${misc:Depends},
+Recommends:
+ adwaita-qt,
+ btrfs-heatmap,
+ chromium,
+ gitk,
+ gnome-shell-extension-caffeine,
+ gnome-shell-extension-dashtodock,
+ gnome-shell-extension-hide-activities,
+ gnome-shell-extension-manager,
+ gnome-software-plugin-flatpak,
+ gnome-software-plugin-snap,
+ gparted,
+ pinentry-gnome3,
+ smart-notifier,
+ ssh-askpass,
+ task-gnome-desktop,
+ tkinfo,
+ wl-clipboard,
+ xclip,
+ xdg-desktop-portal,
+ xdu,
+ xsel,
 Description: Task for the baseline GUI system
  This is a task package installing the baseline GUI system.
  .
@@ -146,23 +160,27 @@ Description: Task for the baseline GUI system
  This doesn't contain:
   * Tools to compile and run programs
   * Tools to install external programs not packaged by Debian
+    (except some GNOME shell extensions)
 
 Package: 03-jpn
 Architecture: all
 Multi-Arch: foreign
-Depends: 02-gui, ${misc:Depends}
-Recommends: fontmatrix,
-            fonts-noto,
-            fonts-takao,
-            fonts-vlgothic,
-            ibus-gtk,
-            ibus-gtk3,
-            ibus-gtk4,
-            ibus-mozc,
-            ibus-wayland,
-            libqt5gui5,
-            lv,
-            nkf
+Depends:
+ 02-gui,
+ ${misc:Depends},
+Recommends:
+ fontmatrix,
+ fonts-noto,
+ fonts-takao,
+ fonts-vlgothic,
+ ibus-gtk,
+ ibus-gtk3,
+ ibus-gtk4,
+ ibus-mozc,
+ ibus-wayland,
+ libqt5gui5,
+ lv,
+ nkf,
 Description: Task for the baseline Japanese GUI system
  This is a task package installing the baseline Japanese GUI system.
  .
@@ -174,63 +192,69 @@ Description: Task for the baseline Japanese GUI system
 Package: 04-dev
 Architecture: all
 Multi-Arch: foreign
-Depends: 01-cli, build-essential, debhelper, devscripts, ${misc:Depends}
-Recommends: apt-file,
-            ben,
-            black,
-            cargo,
-            ccache,
-            cgdb,
-            clang-format,
-            cmake,
-            curl,
-            debmake,
-            dgit,
-            dh-python,
-            docbook-xml,
-            docbook-xsl,
-            eatmydata,
-            faketime,
-            gdb,
-            gdebi,
-            gettext,
-            git-buildpackage,
-            gitk,
-            golang,
-            golang-any,
-            graphicsmagick-imagemagick-compat,
-            hugo,
-            imediff,
-            libreply-perl,
-            libterm-readline-gnu-perl,
-            libxml2-utils,
-            lsof,
-            ltrace,
-            luarocks,
-            meld,
-            nodejs,
-            npm,
-            perl,
-            pipx,
-            po4a,
-            python3,
-            python3-distutils-extra,
-            python3-gi,
-            python3-pil,
-            python3-venv,
-            quilt,
-            reprepro,
-            rlwrap,
-            rpm2cpio,
-            rustc,
-            sbuild,
-            shellcheck,
-            shunit2,
-            signing-party,
-            strace,
-            texinfo,
-            xsltproc,
-            xtrace
+Depends:
+ debhelper,
+ 01-cli,
+ build-essential,
+ devscripts,
+ ${misc:Depends},
+Recommends:
+ dh-python,
+ apt-file,
+ ben,
+ black,
+ cargo,
+ ccache,
+ cgdb,
+ clang-format,
+ cmake,
+ curl,
+ debmake,
+ dgit,
+ docbook-xml,
+ docbook-xsl,
+ eatmydata,
+ faketime,
+ gdb,
+ gdebi,
+ gettext,
+ git-buildpackage,
+ gitk,
+ golang,
+ golang-any,
+ graphicsmagick-imagemagick-compat,
+ hugo,
+ imediff,
+ libreply-perl,
+ libterm-readline-gnu-perl,
+ libxml2-utils,
+ lsof,
+ ltrace,
+ luarocks,
+ meld,
+ nodejs,
+ npm,
+ perl,
+ pipx,
+ po4a,
+ python3,
+ python3-distutils-extra,
+ python3-gi,
+ python3-pil,
+ python3-venv,
+ quilt,
+ reprepro,
+ rlwrap,
+ rpm2cpio,
+ rustc,
+ sbuild,
+ shellcheck,
+ shunit2,
+ signing-party,
+ strace,
+ texinfo,
+ xsltproc,
+ xtrace,
 Description: Task for the baseline development system
  This is a task package installing the baseline development system.
  .
@@ -247,23 +271,25 @@ Description: Task for the baseline development system
 Package: 05-doc
 Architecture: all
 Multi-Arch: foreign
-Depends: ${misc:Depends}
-Recommends: cpp-doc,
-            debian-policy,
-            debian-reference,
-            debmake-doc,
-            developers-reference,
-            doc-base,
-            gcc-doc,
-            gccintro,
-            gdb-doc,
-            git-doc,
-            ibus-doc,
-            iproute2-doc,
-            maint-guide,
-            make-doc,
-            perl-doc,
-            python3-doc
+Depends:
+ ${misc:Depends},
+Recommends:
+ cpp-doc,
+ debian-policy,
+ debian-reference,
+ debmake-doc,
+ developers-reference,
+ doc-base,
+ gcc-doc,
+ gccintro,
+ gdb-doc,
+ git-doc,
+ ibus-doc,
+ iproute2-doc,
+ maint-guide,
+ make-doc,
+ perl-doc,
+ python3-doc,
 Description: Task to add documentation support
  This is a task package to add documentation support for the baseline
  development system.
@@ -273,8 +299,14 @@ Description: Task to add documentation support
 Package: 06-typ
 Architecture: all
 Multi-Arch: foreign
-Depends: 02-gui, ${misc:Depends}
-Recommends: 01-cli, 03-jpn, 04-dev, 05-doc
+Depends:
+ 02-gui,
+ ${misc:Depends},
+Recommends:
+ 01-cli,
+ 03-jpn,
+ 04-dev,
+ 05-doc,
 Description: Task for the typical desktop system
  This is a task package installing the typical desktop system.
  .
@@ -283,8 +315,16 @@ Description: Task for the typical desktop system
 Package: 12-virt
 Architecture: all
 Multi-Arch: foreign
-Depends: 02-gui, ${misc:Depends}
-Recommends: gnome-boxes, lxc, vde2, virt-manager, virt-viewer
+Depends:
+ 02-gui,
+ ${misc:Depends},
+Recommends:
+ gnome-boxes,
+ incus,
+ podman-docker,
+ vde2,
+ virt-manager,
+ virt-viewer,
 Description: Task to add virtual OS environment support
  This is a task package to add virtual OS environment support.
  .
@@ -293,21 +333,24 @@ Description: Task to add virtual OS environment support
 Package: 14-iot
 Architecture: all
 Multi-Arch: foreign
-Depends: 04-dev, ${misc:Depends}
-Recommends: arduino,
-            arduino-mk,
-            avra,
-            avrdude,
-            avrp,
-            binutils-avr,
-            freecad,
-            fritzing,
-            gcc-avr,
-            gdb-avr,
-            kicad,
-            librecad,
-            openscad,
-            simavr
+Depends:
+ 04-dev,
+ ${misc:Depends},
+Recommends:
+ arduino,
+ arduino-mk,
+ avra,
+ avrdude,
+ avrp,
+ binutils-avr,
+ freecad,
+ fritzing,
+ gcc-avr,
+ gdb-avr,
+ kicad,
+ librecad,
+ openscad,
+ simavr,
 Description: Task to add IoT development support
  This is a task package to add IoT development support.
  .
@@ -317,13 +360,16 @@ Description: Task to add IoT development support
 Package: 14-tex
 Architecture: all
 Multi-Arch: foreign
-Depends: 04-dev, ${misc:Depends}
-Recommends: dblatex,
-            fonts-arphic-bsmi00lp,
-            fonts-arphic-gbsn00lp,
-            fonts-wqy-zenhei,
-            texlive-full,
-            xmlto
+Depends:
+ 04-dev,
+ ${misc:Depends},
+Recommends:
+ dblatex,
+ fonts-arphic-bsmi00lp,
+ fonts-arphic-gbsn00lp,
+ fonts-wqy-zenhei,
+ texlive-full,
+ xmlto,
 Description: Task to add TeX support
  This is a task package to add TeX support.
  .
@@ -332,19 +378,22 @@ Description: Task to add TeX support
 Package: 16-extra
 Architecture: all
 Multi-Arch: foreign
-Depends: 06-typ, ${misc:Depends}
-Recommends: asciidoc,
-            asciidoctor,
-            fail2ban,
-            git-svn,
-            knockd,
-            linux-cpupower,
-            memtest86+,
-            parallel,
-            rclone,
-            rename,
-            shellinabox,
-            subversion
+Depends:
+ 06-typ,
+ ${misc:Depends},
+Recommends:
+ asciidoc,
+ asciidoctor,
+ fail2ban,
+ git-svn,
+ knockd,
+ linux-cpupower,
+ memtest86+,
+ parallel,
+ rclone,
+ rename,
+ shellinabox,
+ subversion,
 Description: Task to add extra utilities
  This is a task package to add extra utilities.  Anything which doesn't fit in
  the existing tasks are moved to here.
@@ -354,25 +403,28 @@ Description: Task to add extra utilities
 Package: 99-notex
 Architecture: all
 Multi-Arch: foreign
-Depends: ${misc:Depends}
-Conflicts: dblatex,
-           dvipng,
-           texlive,
-           texlive-base,
-           texlive-binaries,
-           texlive-full,
-           texlive-latex-base,
-           texlive-lualatex,
-           texlive-xetex
-Provides: dblatex,
-          dvipng,
-          texlive,
-          texlive-base,
-          texlive-binaries,
-          texlive-full,
-          texlive-latex-base,
-          texlive-lualatex,
-          texlive-xetex
+Depends:
+ ${misc:Depends},
+Conflicts:
+ dblatex,
+ dvipng,
+ texlive,
+ texlive-base,
+ texlive-binaries,
+ texlive-full,
+ texlive-latex-base,
+ texlive-lualatex,
+ texlive-xetex,
+Provides:
+ dblatex,
+ dvipng,
+ texlive,
+ texlive-base,
+ texlive-binaries,
+ texlive-full,
+ texlive-latex-base,
+ texlive-lualatex,
+ texlive-xetex,
 Description: Task to avoid adding TeX related packages
  This is a task package to avoid adding TeX support.
  .

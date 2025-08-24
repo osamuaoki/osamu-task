@@ -1,0 +1,11 @@
+# activate by: systemctl --user enable bss-BKUP_USB.service
+[Unit]
+Description=USB Disk backup
+Requires=media-osamu-BKUP_USB.mount
+After=media-osamu-BKUP_USB.mount
+
+[Service]
+ExecStart=bss --may --type usb batch BKUP_USB
+
+[Install]
+WantedBy=media-osamu-BKUP_USB.mount
